@@ -13,7 +13,7 @@ describe ChallengeApi do
       Business.create(:name => "McTesterton's")
     end
 
-    it 'creates a checking record' do
+    it 'creates a checkin record' do
       data={'user_id' => 1, 'business_id' => 1, 'checkin_date' => '2012-12-25'}
       post '/checkin', data, 'Password' => 'password', 'Content-Type' => 'application/json'
       response_data = JSON.parse(last_response.body) 
