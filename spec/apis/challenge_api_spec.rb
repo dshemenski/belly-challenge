@@ -20,6 +20,13 @@ describe ChallengeApi do
       expect(last_response.status).to eq(201)
       expect(response_data).to eq(data.merge({'id' => 1}))
     end
+    
+    it 'prevents multiple checkins in the same day' do
+      data={'user_id' => 1, 'business_id' => 1, 'checkin_date' => '2012-12-25'}
+      post '/checkin', data, 'Password' => 'password', 'Content-Type' => 'application/json'
+      post '/checkin', data, 'Password' => 'password', 'Content-Type' => 'application/json'
+      expect(last_response.status).to eq(403)
+    end
   end
 
   describe 'GET /checkin' do
